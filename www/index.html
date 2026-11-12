@@ -589,12 +589,12 @@ $('shareTransfer').addEventListener('click',async()=>{
   clearTimeout(slow);hideToast();
   const Share=getCapPlugin('Share');
   if(uri&&Share&&typeof Share.share==='function'){
-   try{await Share.share({title:ar?'تحويل MOC':'MOC Transfer',files:[uri],dialogTitle:ar?'مشاركة الصورة':'Share image'});return;}
+   try{await Share.share({files:[uri],dialogTitle:ar?'مشاركة الصورة':'Share image'});return;}
    catch(err){if(isCancel(err))return;}
   }
   try{
    const file=new File([blob],'MOC-Transfer.jpg',{type:'image/jpeg'});
-   if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({files:[file],title:ar?'تحويل MOC':'MOC Transfer'});return;}
+   if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({files:[file]});return;}
   }catch(err){if(isCancel(err))return;}
   showShareFallback(blob,ar);
  }catch(e){alert(ar?'تعذر تجهيز الصورة':'Could not create image');}
